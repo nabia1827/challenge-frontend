@@ -9,8 +9,10 @@ import { jwtDecode } from 'jwt-decode';
 import { login } from '../store/actions/auth/authActionSync';
 import LoginPage from '../pages/publicPages/login/LoginPage';
 import PrivatePage from '../pages/privatePages/privatePage';
-import NotesPage from '../pages/privatePages/notes/NotesPage';
-import { NoteType } from '../utils/constants';
+import ItemPage from '../pages/privatePages/ItemPage';
+import SupplierPage from '../pages/privatePages/supplier/SupplierPage';
+import SuppliersPage from '../pages/privatePages/suppliers/SuppliersPage';
+import { SupplierType } from '../utils/constants';
 
 const RoutesApp = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -20,7 +22,7 @@ const RoutesApp = () => {
 
 
   useEffect(() => {
-    
+
     const token = getAccessToken();
     if (token) {
       const tokenDecode = jwtDecode(token);
@@ -57,7 +59,7 @@ const RoutesApp = () => {
       dispatch(cargarTiposPena())
       dispatch(cargarTiposSentencia())  
       dispatch(cargarDistritosJudicial()) */
-      
+
     }
   }, [dispatch, isAuthenticated]);
 
@@ -70,11 +72,14 @@ const RoutesApp = () => {
 
         {/* Private routes */}
         <Route path="/" element={<PrivatePage isAuthenticated={isAuthenticated} />}>
-          <Route path={pathSegments.MY_NOTES} element={<NotesPage type={NoteType.ACTIVE}/>} />
-          <Route path={pathSegments.ARCHIVED_NOTES} element={<NotesPage type={NoteType.ARCHIVED}/>} />
-          <Route path={pathSegments.DELETED_NOTES} element={<NotesPage type={NoteType.DELETED}/>} />
+          <Route index element={<SuppliersPage />} />
+          <Route path={pathSegments.CREATE_SUPPLIER} element={<SupplierPage type={SupplierType.CREATE}/>} />
+          <Route path=":id" element={<ItemPage />} >
+            <Route path={pathSegments.SEE_SUPPLIER} element={<SupplierPage type={SupplierType.SEE}/>} />
+            <Route path={pathSegments.EDIT_SUPPLIER} element={<SupplierPage type={SupplierType.EDIT}/>} />
+          </Route>
         </Route>
-        
+
 
       </Routes>
     </Router>

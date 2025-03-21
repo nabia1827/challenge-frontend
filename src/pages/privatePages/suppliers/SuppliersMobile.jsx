@@ -1,13 +1,13 @@
 import React from "react";
 
-function NotesMobile(){
+function SuppliersMobile(){
 
     return(
         <>
-        Notes
+        Hola
         </>
     );
 
 }
 
-export default NotesMobile;
+export default SuppliersMobile;

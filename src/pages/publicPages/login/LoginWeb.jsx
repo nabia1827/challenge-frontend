@@ -3,7 +3,7 @@ import { Flex, Button, Input, Typography, ConfigProvider, Switch } from "antd";
 import { colors } from "../../../utils/colors";
 import { motion } from "framer-motion";
 
-import { Feather, User, LockKey, WarningCircle } from "@phosphor-icons/react";
+import { UsersThree, User, LockKey, WarningCircle } from "@phosphor-icons/react";
 import { enableButtonStyle, hoverButtonStyle } from "../../../utils/styles";
 
 
@@ -70,9 +70,9 @@ function LoginWeb(props) {
                 <Flex onMouseMove={handleMouseMove} vertical justify="center" align="center" style={{ width: "50%", height: "100vh", background: colors.gradient, overflow: "hidden" }}>
                     <Flex gap={"middle"} justify="center" align="center" style={{ width: "100%" }}>
                         <Flex justify="center" align="center" style={{ width: "70px", height: "70px", backgroundColor: "white", borderRadius: "5.0em" }}>
-                            <Feather size={40} weight="fill" color={colors.middleBlue} />
+                            <UsersThree size={40} weight="fill" color={colors.middleBlue} />
                         </Flex>
-                        <Text className="sie-logo">Quick Quill</Text>
+                        <Text className="sie-logo">SafeSupply</Text>
                     </Flex>
                     {trail.map((point) => (
                         <motion.div

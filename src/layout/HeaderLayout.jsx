@@ -14,7 +14,7 @@ import {
     Lightning,
     Funnel,
     Bell,
-    Feather,
+    UsersThree,
     CalendarBlank,
     ChartBar,
     HandArrowDown,
@@ -56,10 +56,10 @@ function HeaderLayout(props) {
                             }}
                         />
                         <Flex justify="center" align="center" style={{ width: "40px", height: "40px", background: colors.gradient, borderRadius: "5.0em" }}>
-                            <Feather size={24} weight="fill" color={colors.white} />
+                            <UsersThree size={24} weight="fill" color={colors.white} />
 
                         </Flex>
-                        <Text className="qq-app-logo">QuickQuill</Text>
+                        <Text className="qq-app-logo">SafeSupply</Text>
                     </Flex>
                     <Flex gap={"small"} justify="flex-end" align="center" style={{ height: "100%" }}>
 

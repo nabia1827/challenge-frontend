@@ -14,3 +14,9 @@ export const OperationType = {
     CREATE:"create",
     EDIT:"edit"
 }
+
+export const SupplierType = {
+    CREATE: "create",
+    EDIT:"edit",
+    SEE:"see"
+}

@@ -43,7 +43,7 @@ function LoginPage() {
                     setLoading(false);
                     setStatus("");
                     setTextError("");
-                    navigate(paths.MY_NOTES);
+                    navigate(paths.SUPPLIERS);
                 } else {
                     setLoading(false);
                     

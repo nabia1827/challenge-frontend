@@ -10,23 +10,10 @@ import {
 import { paths } from "./paths";
 export const items = [
     {
-        key: paths.MY_NOTES,
-        label: 'My Notes',
+        key: paths.SUPPLIERS,
+        label: 'Suppliers List',
         icon: <Note size={20} />,
         profiles: [],
-    },
-    {
-        key: paths.ARCHIVED_NOTES,
-        label: 'Archived Notes',
-        icon: <BoxArrowDown size={20}/>,
-        profiles: [],
-    },
-    {
-        key: paths.DELETED_NOTES,
-        label: 'Deleted Notes',
-        icon: <TrashSimple size={20}/>,
-        profiles: [],
-        
     },
     {
         key: 'logout',

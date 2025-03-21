@@ -1,6 +1,6 @@
 import React from "react";
 
-function HomeWeb(){
+function SupplierMobile(){
 
     return(
         <>
@@ -10,4 +10,4 @@ function HomeWeb(){
 
 }
 
-export default HomeWeb;
+export default SupplierMobile;

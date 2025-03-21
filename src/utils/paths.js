@@ -3,10 +3,11 @@ export const pathSegments = {
     FORGOT_PASSWORD:"forgot-password",
     RESET_PASSWORD: "reset-password",
     VERIFY_CODE: "verify-code",
-    HOME: "home", 
-    MY_NOTES:"my-notes",
-    ARCHIVED_NOTES:"archive",
-    DELETED_NOTES:"bin",
+    HOME: "list-suppliers", 
+    SUPPLIERS:"list-suppliers",
+    CREATE_SUPPLIER:"create",
+    EDIT_SUPPLIER:"edit",
+    SEE_SUPPLIER:"see",
 }
 
 export const paths = {
@@ -15,8 +16,9 @@ export const paths = {
     RESET_PASSWORD: `/${pathSegments.RESET_PASSWORD}`,
     VERIFY_CODE: `/${pathSegments.VERIFY_CODE}`,
     ROOT:`/`,//No tocar
-    HOME: `/${pathSegments.HOME}`, 
-    MY_NOTES: `/${pathSegments.MY_NOTES}`,
-    ARCHIVED_NOTES: `/${pathSegments.ARCHIVED_NOTES}`,
-    DELETED_NOTES: `/${pathSegments.DELETED_NOTES}`,
+    HOME: `/`, 
+    SUPPLIERS: `/`,
+    CREATE_SUPPLIER: `/${pathSegments.CREATE_SUPPLIER}`,
+    EDIT_SUPPLIER:(id) => `${id}/${pathSegments.EDIT_SUPPLIER}`,
+    SEE_SUPPLIER:(id) => `${id}/${pathSegments.SEE_SUPPLIER}`,
 };

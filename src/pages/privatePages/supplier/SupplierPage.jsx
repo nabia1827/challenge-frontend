@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { Flex, Grid} from "antd";
-import HomeMobile from "./HomeMobile";
-import HomeWeb from "./HomeWeb";
+import SupplierWeb from "./SupplierWeb";
+import SupplierMobile from "./SupplierMobile";
 
 const { useBreakpoint } = Grid;
 
-function HomePage() {
+function SupplierPage(props) {
+    const {type} = props;
     const screens = useBreakpoint();
     const isXsScreen = screens.xs !== undefined && screens.xs;
 
     return <>{isXsScreen ?
-        <HomeMobile
+        <SupplierMobile
         /> :
-        <HomeWeb
+        <SupplierWeb
         />
     }
         
     </>;
 }
 
-export default HomePage;
+export default SupplierPage;
