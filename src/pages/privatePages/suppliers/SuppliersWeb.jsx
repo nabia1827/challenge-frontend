@@ -12,10 +12,15 @@ import {
 import dayjs from 'dayjs';
 import { ColumnsSuppliers } from "../../../utils/suppliers/columnsSuppliers";
 import SupplierFilter from "../../../components/filters/SuppliersFilter";
+import ModalDeleteSupplier from "../../../components/modals/ModalDeleteSupplier";
+import ModalScreening from "../../../components/modals/ModalScreening";
 
 function SuppliersWeb(props) {
-    const { onChange, loading,filterForm,paises,handleOnFieldsChange,onClickCreate } = props;
-    const columns = ColumnsSuppliers()
+    const { onChange, loading,filterForm,countries,handleOnFieldsChange,scrappedData,
+        onClickCreate,onClickEdit,onClickSee,
+        mdDeleteOpen,mdScrOpen,showMdDelete,showMdScr,onOkMdDelete,onOkMdScr,
+        onCancelMdDelete,onCancelMdScr,scrForm,currentSupplier,sources,mdScrLoading } = props;
+    const columns = ColumnsSuppliers(onClickEdit,onClickSee,showMdDelete,showMdScr)
 
     const data = [
         {
@@ -77,7 +82,7 @@ function SuppliersWeb(props) {
                 </Flex>
                 <br></br>
                 <SupplierFilter form={filterForm} 
-                paises={paises} handleOnFieldsChange={handleOnFieldsChange}></SupplierFilter>
+                countries={countries} handleOnFieldsChange={handleOnFieldsChange}></SupplierFilter>
                 <br></br>
                 <Table
                     style={{ width: "100%" }}
@@ -106,6 +111,25 @@ function SuppliersWeb(props) {
 
                 />
             </Flex>
+            <ModalDeleteSupplier
+            modalOpen = {mdDeleteOpen}
+            handleOk = {onOkMdDelete}
+            handleCancel = {onCancelMdDelete}
+            name = {currentSupplier?.tradeName??""}
+            >
+                
+            </ModalDeleteSupplier>
+            <ModalScreening
+            modalOpen = {mdScrOpen}
+            handleOk = {onOkMdScr}
+            handleCancel = {onCancelMdScr}
+            form = {scrForm}
+            sources = {sources}
+            data = {scrappedData}
+            loading={mdScrLoading}
+            >
+
+            </ModalScreening>
 
         </>
     );

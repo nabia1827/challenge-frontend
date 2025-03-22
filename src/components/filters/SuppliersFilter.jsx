@@ -12,7 +12,7 @@ import {
 
 
 function SupplierFilter(props) {
-    const { paises, form, onReset, handleOnFieldsChange } = props;
+    const { countries, form, onReset, handleOnFieldsChange } = props;
 
     return (
         <>
@@ -75,9 +75,9 @@ function SupplierFilter(props) {
                                                     allowClear
                                                 >
                                                     {
-                                                        paises.map((p) => (
-                                                            <Select.Option key={p.paisId} value={p.paisId}>
-                                                                {p.paisNombre}
+                                                        countries.map((c) => (
+                                                            <Select.Option key={c.countryId} value={c.countryId}>
+                                                                {c.countryName}
                                                             </Select.Option>
                                                         ))
                                                     }

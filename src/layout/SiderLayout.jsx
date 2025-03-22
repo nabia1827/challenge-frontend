@@ -80,7 +80,7 @@ function SiderLayout(props) {
                     </Flex>
                 </Drawer>
             ) : (
-                <Sider breakpoint="md" width="280px" style={siderStyle} collapsedWidth="75px" collapsible collapsed={collapsed} trigger={null}>
+                <Sider breakpoint="md" width="240px" style={siderStyle} collapsedWidth="75px" collapsible collapsed={collapsed} trigger={null}>
                     <Menu onClick={handleMenuClick} style={{ backgroundColor: 'transparent', height: "100%" }} theme="light" mode="inline" defaultSelectedKeys={['1']} items={items} >
 
                     </Menu>

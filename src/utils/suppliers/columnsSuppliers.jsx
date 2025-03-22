@@ -12,7 +12,7 @@ import {
     Trash,
  } from "@phosphor-icons/react";
 
-export const ColumnsSuppliers = () => {
+export const ColumnsSuppliers = (onClickEdit,onClickSee,showMdDelete,showMdScr) => {
     const columns = [
         
         {
@@ -76,10 +76,10 @@ export const ColumnsSuppliers = () => {
             key: 'acciones',
             render: (_, record, index) => (
                 <Flex gap={"small"} justify="center" align="center">
-                    <Button  type="primary" shape="circle" style={{backgroundColor:colors.lightBlack}} icon={<Eye size={20} color={colors.white} />} />
-                    <Button  type="primary" shape="circle" style={{backgroundColor:colors.blue}} icon={<PencilSimpleLine size={20} color={colors.white} />} />
-                    <Button  type="primary" shape="circle" style={{backgroundColor:colors.blue}} icon={<UserCheck size={20} color={colors.white} />} />
-                    <Button  type="primary" shape="circle" style={{backgroundColor:colors.red}} icon={<Trash size={20} color={colors.white} />} />
+                    <Button onClick={()=>onClickSee(record.supplierId)} type="primary" shape="circle" style={{backgroundColor:colors.lightBlack}} icon={<Eye size={20} color={colors.white} />} />
+                    <Button onClick={()=>onClickEdit(record.supplierId)}  type="primary" shape="circle" style={{backgroundColor:colors.blue}} icon={<PencilSimpleLine size={20} color={colors.white} />} />
+                    <Button onClick={()=>showMdScr(record)} type="primary" shape="circle" style={{backgroundColor:colors.blue}} icon={<UserCheck size={20} color={colors.white} />} />
+                    <Button onClick={()=>showMdDelete(record)} type="primary" shape="circle" style={{backgroundColor:colors.red}} icon={<Trash size={20} color={colors.white} />} />
                     
                     
                 </Flex>

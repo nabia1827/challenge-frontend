@@ -12,7 +12,7 @@ import SiderLayout from "./SiderLayout";
 import { MenuOutlined } from '@ant-design/icons';
 
 function BaseLayout({ children }) {
-    const [collapsed, setCollapsed] = useState(false)
+    const [collapsed, setCollapsed] = useState(true)
     const screens = useBreakpoint();
 
     const onCollapse = (collapsed, type) => {

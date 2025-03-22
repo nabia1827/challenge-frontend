@@ -5,9 +5,9 @@ export const NoteType = {
 };
 
 export const Titles = {
-    ACTIVE: "My Notes",
-    ARCHIVED: "Archived Notes",
-    DELETED: "Deleted Notes",
+    CREATE: "Create",
+    EDIT:"Edit",
+    SEE:""
 };
 
 export const OperationType = {
@@ -16,7 +16,7 @@ export const OperationType = {
 }
 
 export const SupplierType = {
-    CREATE: "create",
-    EDIT:"edit",
-    SEE:"see"
+    CREATE: "CREATE",
+    EDIT:"EDIT",
+    SEE:"SEE"
 }

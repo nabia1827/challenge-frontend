@@ -49,7 +49,7 @@ export const hoverButtonStyle = {
 
 export const enableModalButtonStyle = {
     background: 'linear-gradient(to right,#5271FF, #47BAD8)',
-    padding: '0.7em',
+    padding: '1.2em',
     borderRadius: '0.5em',
     color: 'white',
     borderColor: 'transparent',
