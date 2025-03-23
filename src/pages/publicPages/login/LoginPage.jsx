@@ -26,11 +26,11 @@ function LoginPage() {
     const [rememberMe, setRememberMe] = useState(false);
 
     const onChangeUsername = (e) => {
-        console.log(e.target.value);
+        //(e.target.value);
         setUsername(e.target.value);
     }
     const onChangePassword = (e) => {
-        console.log(e.target.value);
+        //console.log(e.target.value);
         setPassword(e.target.value);
     }
 

@@ -18,7 +18,7 @@ import { login, logout, refreshTokenExpired } from "./authActionSync";
 export const startLogin = (username, userPassword) => async (dispatch) => {
     //dispatch(setLoading(true));
     try {
-        console.log("User: ",username, " - ",userPassword)
+        //console.log("User: ",username, " - ",userPassword)
         const response = await api.Auth.loginApp({
             username: username,
             userPassword: userPassword,
@@ -29,12 +29,12 @@ export const startLogin = (username, userPassword) => async (dispatch) => {
             password: userPassword,
         });
         
-        console.log(response)
+        //console.log(response)
         if (response.isSuccess && responsePython.success) {
             const { data } = response;
 
-            console.log("Logged in: ", data);
-            console.log("Auth python: ", responsePython)
+            //console.log("Logged in: ", data);
+            //console.log("Auth python: ", responsePython)
             const { token, refreshToken } = data;
 
 

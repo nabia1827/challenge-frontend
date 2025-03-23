@@ -28,14 +28,14 @@ function SiderLayout(props) {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const screens = useBreakpoint();
-    console.log("BREAKPOINT!!!", screens);
+    //console.log("BREAKPOINT!!!", screens);
     const { profileId } = useSelector((state) => state.auth.user);
     const [items, setItems] = useState([]);
 
     useEffect(() => {
         if (profileId) {
             const its = getMenuItemsForUser(profileId);
-            console.log("its ", its);
+            //console.log("its ", its);
             setItems(its);
         }
     }, [profileId]);
@@ -47,12 +47,12 @@ function SiderLayout(props) {
 
 
     const handleMenuClick = (e) => {
-        console.log(e.key)
+        //console.log(e.key)
         if (e.key == 'logout') {
             logout()
         } else {
             const selectedItem = items.find(item => item.key === e.key);
-            console.log("Selected Item: ", selectedItem)
+            //console.log("Selected Item: ", selectedItem)
             if (selectedItem && selectedItem.key) {
 
                 navigate(selectedItem.key);

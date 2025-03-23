@@ -61,7 +61,7 @@ axiosDotNet.interceptors.response.use(
               expiredToken: getAccessToken(),
               refreshToken: getRefreshToken(),
             });
-            console.log('Refresh token response:', rs);
+            //console.log('Refresh token response:', rs);
             const newAccessToken = rs.token;
             const refreshToken = rs.refreshToken;
 
@@ -126,7 +126,7 @@ axiosPython.interceptors.response.use(
               userId: 0,
               token: getPythonToken(),
             });
-            console.log('Python token response:', rs);
+            //console.log('Python token response:', rs);
             const newPythonToken = rs.token;
 
             setPythonToken(newPythonToken)

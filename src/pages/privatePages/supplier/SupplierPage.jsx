@@ -38,7 +38,7 @@ function SupplierPage(props) {
     }, [id]);
 
     useEffect(() => {
-        console.log("Loading supplier: ", loading);
+        //console.log("Loading supplier: ", loading);
     }, [loading]);
 
     useEffect(() => {
@@ -61,7 +61,7 @@ function SupplierPage(props) {
         setLoading(true);
         try {
             const values = await form.validateFields();
-            console.log("Upsert form: ", values)
+            //console.log("Upsert form: ", values)
             UpsertSupplier(
                 type == SupplierType.CREATE ? 0 : supplier.supplierId,
                 values.legalName,

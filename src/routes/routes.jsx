@@ -26,7 +26,7 @@ const RoutesApp = () => {
     const token = getAccessToken();
     if (token) {
       const tokenDecode = jwtDecode(token);
-      console.log("Token: ", tokenDecode);
+      //console.log("Token: ", tokenDecode);
       const user = {
         userId: tokenDecode.UserId,
         username: tokenDecode.Username,
@@ -36,7 +36,7 @@ const RoutesApp = () => {
         userEmail: tokenDecode.UserEmail,
         userImage: tokenDecode.UserImage,
       };
-      console.log("Refresh- Logged in: ", user);
+      //console.log("Refresh- Logged in: ", user);
       dispatch(login(user));
     }
   }, [dispatch]);
@@ -75,57 +75,3 @@ const RoutesApp = () => {
 };
 
 export default RoutesApp;
-
-/*
-
-<Route path="/" element={<InternalPage isAuthenticated={isAuthenticated} />}>
-<Route index element={<HomePage />} />
-<Route path={endpoints.HOME} element={<HomePage />} />
-
-<Route path={endpoints.CONSULTA_LEGAJOS} element={<ConsultaLegajosPage />}>
-
-  <Route path={endpoints.MIS_LEGAJOS} element={<MisLegajosPage />}>
-    <Route index element={<ListadoLegajosPage allLegajos = {false}/>} />
-    <Route path=":id" element={<LegajoPage />} >
-      <Route path={endpoints.DETALLE_LEGAJO} element={<DetalleLegajoPage />} />
-      <Route path={endpoints.DOCS_INGRESO_LEGAJO} element={<DocsIngresoPage />} />
-      <Route path={endpoints.DOCS_SALIDA_LEGAJO} element={<SalidaSectionPage />} >
-        <Route index element={<DocsSalidaPage/>} />
-        <Route path={`${endpoints.CREAR_DOC}/:claseDocumento`} element={<CrearDocPage />} />
-      </Route>
-    </Route>
-  </Route>
-
-  <Route path={endpoints.TODOS_LEGAJOS} element={<TodosLegajosPage />}>
-    <Route index element={<ListadoLegajosPage allLegajos = {true}/>} />
-    <Route path=":id" element={<LegajoPage />} >
-      <Route path={endpoints.DETALLE_LEGAJO} element={<DetalleLegajoPage />} />
-      <Route path={endpoints.DOCS_INGRESO_LEGAJO} element={<DocsIngresoPage />} />
-      <Route path={endpoints.DOCS_SALIDA_LEGAJO} element={<SalidaSectionPage />} >
-        <Route index element={<DocsSalidaPage/>} />
-        <Route path={`${endpoints.CREAR_DOC}/:claseDocumento`} element={<CrearDocPage />} />
-      </Route>
-    </Route>
-  </Route>
-
-</Route>
-
-<Route path={endpoints.AUDIENCIAS} element={<AudienciasPage></AudienciasPage>}>
-  <Route path={endpoints.MIS_AUDIENCIAS} element={<MisAudienciasPage />} />
-  <Route path={endpoints.TODAS_AUDIENCIAS} element={<TodasAudienciasPage />} />
-</Route>
-
-
-<Route path={endpoints.REPORTE_LEGAJOS} element={<ReporteLegajosPage></ReporteLegajosPage>}>
-  <Route path={endpoints.REPORTE_GENERAL} element={<ReporteGeneralPage />} />
-  <Route path={endpoints.SEGUIMIENTO} element={<SeguimientoPage />} />
-</Route>
-
-<Route path={endpoints.RECEPCION_LEGAJOS} element={<InicioRecepcionPage/>} >
-  <Route index element={<RecepcionPage />} />
-  <Route path={`${endpoints.NUEVO_LEGAJO}/:legajoId/:documentoId/:audienciaId`} element={<NuevoLegajoPage/>} />
-  <Route path={`${endpoints.ADICIONAR_LEGAJO}/:legajoId/:documentoId/:audienciaId`} element={<AdicionarDocsPage/>} />
-</Route>
-</Route>
-<Route path="*" component={<NotFoundPage />} />
-*/
