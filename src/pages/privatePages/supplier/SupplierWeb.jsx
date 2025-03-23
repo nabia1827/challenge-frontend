@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Flex, Row, Col, Select, Button, Typography, Form, Tag, Input } from "antd";
+import { Flex, Row, Col, Select, Button, Typography, Form, Tag, Input, Spin } from "antd";
 import { colors } from "../../../utils/colors";
 const { Text } = Typography;
 import {
@@ -12,7 +12,7 @@ import {
 import { Titles, SupplierType } from "../../../utils/constants";
 
 function SupplierWeb(props) {
-    const { form, handleSave, onBack, type, countries } = props;
+    const { form, handleSave, onBack, type, countries, loading } = props;
 
 
 
@@ -28,6 +28,7 @@ function SupplierWeb(props) {
                 <Flex style={{ width: "100%", padding: "9px" }}>
                     <Form
                         form={form}
+                        disabled = {type == SupplierType.SEE}
                         onFinish={handleSave}
                         style={{ width: "100%" }}
                         labelWrap={true}
@@ -51,6 +52,7 @@ function SupplierWeb(props) {
                         <Row gutter={[12, 36]} justify={"flex-start"} align={"flex-start"} style={{ width: "100%" }}>
                             <Col xs={24} sm={24} md={12} lg={12} xl={12} >
                                 <Form.Item
+                                    
                                     style={{ width: "100%", marginBottom: "0", padding: "0" }}
                                     label={<Text className="qq-app-modal-title" >Legal Name</Text>}
                                     name='legalName'
@@ -110,7 +112,7 @@ function SupplierWeb(props) {
                                 <Form.Item
                                     style={{ width: "100%", marginBottom: "0" }}
                                     label={<Text className="qq-app-modal-title" >Cell Phone</Text>}
-                                    name='cellphone'
+                                    name='phone'
                                     rules={[
                                         {
                                             required: true,

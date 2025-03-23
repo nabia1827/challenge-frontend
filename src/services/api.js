@@ -20,8 +20,24 @@ const Auth = {
     logOutApp: (body) => requests.post('/Auth/Logout', body),
 };
 
+const Supplier = {
+    ListSuppliers: (filter) => axiosDotNet.get('/Supplier/ListSuppliers', { params: filter }).then(responseBody),
+    GetSupplier: supplierId => requests.get(`/Supplier/GetSupplier?supplierId=${supplierId}`),
+    UpsertSupplier: (supplier) => requests.post(`/Supplier/UpsertSupplier`, supplier),
+    DeleteSupplier: (supplierId) => requests.patch(`/Supplier/DeleteSupplier?supplierId=${supplierId}`),
+}
+
+const Country = {
+    ListCountries: () => requests.get('/Country/ListCountries'),
+}
+
+const Source = {
+    ListSources: () => requests.get('/Source/ListSources'),
+}
 
 export default { 
     Auth, 
-    
+    Supplier,
+    Country,
+    Source,
 };

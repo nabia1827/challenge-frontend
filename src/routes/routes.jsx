@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import store from '../store/store';
 import { paths, pathSegments } from '../utils/paths';
-//import { Perfiles } from '../utils/constants';
+import { loadContries,loadSources } from '../store/actions/app/appActionAsync';
 import { getAccessToken } from '../utils/cookie';
 import { jwtDecode } from 'jwt-decode';
 import { login } from '../store/actions/auth/authActionSync';
@@ -43,22 +43,10 @@ const RoutesApp = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      /*
-      dispatch(cargarAbogados())
-      dispatch(cargarSubfases())
-      dispatch(cargarDelegados())
-      dispatch(cargarClasesDoc(1))
-      dispatch(cargarClasesDoc(0))
-      dispatch(CargarSubtipoDanio())
-      dispatch(CargarDependenciaMininter())
-      dispatch(CargarProcuradores())
-      dispatch(CargarDepartamentos())
-      dispatch(cargarDelitos())
-      dispatch(cargarTiposAudiencia())
-      dispatch(cargarTiposRemitente())
-      dispatch(cargarTiposPena())
-      dispatch(cargarTiposSentencia())  
-      dispatch(cargarDistritosJudicial()) */
+      
+      dispatch(loadContries())
+      dispatch(loadSources())
+
 
     }
   }, [dispatch, isAuthenticated]);

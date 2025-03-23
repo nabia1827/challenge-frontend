@@ -1,34 +1,54 @@
 import React, { useState, useEffect } from "react";
-import { Flex, Grid, Form} from "antd";
+import { Flex, Grid, Form, message } from "antd";
 import SuppliersMobile from "./SuppliersMobile";
 import SuppliersWeb from "./SuppliersWeb";
 import { useNavigate } from "react-router-dom";
 import { paths } from "../../../utils/paths";
+import { useSelector } from "react-redux";
+import api from "../../../services/api";
+import useSupplierFilteredData from "../../../hooks/filters/useSupplierFilteredData";
+import { switchOnFieldsChange } from "../../../utils/suppliers/switchOnFieldsChange";
+import { DeleteSupplier } from "../../../utils/suppliers/dinamicCalls";
 const { useBreakpoint } = Grid;
 
 function SuppliersPage() {
     const screens = useBreakpoint();
     const isXsScreen = screens.xs !== undefined && screens.xs;
-    const [loading, setLoading] = useState(false);
+
+    const { countries, sources } = useSelector((state) => state.app);
     const [filterForm] = Form.useForm();
     const navigate = useNavigate();
 
+    const customApiCall = async (filteredRequest) => {
+        const response = await api.Supplier.ListSuppliers(filteredRequest);
+        return response;
+    };
+    const {
+        paginador,
+        loading,
+        onChange,
+        request,
+        setRequest,
+        onReset,
+        form,
+        reloadData,
+        usuId
+    } = useSupplierFilteredData(customApiCall);
+
     //Item Operations 
-    const onClickCreate = () =>{
+    const onClickCreate = () => {
         navigate(paths.CREATE_SUPPLIER)
     }
 
-    const onClickEdit = (id) =>{
+    const onClickEdit = (id) => {
         navigate(paths.EDIT_SUPPLIER(id))
     }
 
-    const onClickSee = (id) =>{
+    const onClickSee = (id) => {
         navigate(paths.SEE_SUPPLIER(id))
     }
 
-    const onChange = () =>{
 
-    }
 
     //Filter
     const handleOnFieldsChange = (changeFields, allFields) => {
@@ -43,13 +63,19 @@ function SuppliersPage() {
     const [currentSupplier, setCurrentSupplier] = useState(null);
 
     const showMdDelete = (record) => {
-        setCurrentSupplier(record)
+        setCurrentSupplier(record);
         setMdDeleteOpen(true);
     };
 
     const onOkMdDelete = () => {
-        setMdDeleteOpen(false);
-        setCurrentSupplier(null);
+        setMdDeleteLoading(true)
+        DeleteSupplier(currentSupplier.supplierId).then((response) => {
+            if (response.isSuccess) {
+                message.success("Successfully removed");
+                setMdDeleteOpen(false);
+                setCurrentSupplier(null);
+            }
+        });
     };
 
     const onCancelMdDelete = () => {
@@ -62,21 +88,21 @@ function SuppliersPage() {
     const [mdScrLoading, setMdScrLoading] = useState(false);
     const [scrappedData, setScrappedData] = useState([]);
     const [scrForm] = Form.useForm();
-    
+
     const dummyData = [
         {
-            id:1,
-            entity:"NAMCHOW (BRITISH VIRGIN ISLANDS) LTD.",
-            jurisdiction:"British Virgin Islands",
-            linkedTo:"Hong Kong",
-            dataFrom:"Panama Papers",
+            id: 1,
+            entity: "NAMCHOW (BRITISH VIRGIN ISLANDS) LTD.",
+            jurisdiction: "British Virgin Islands",
+            linkedTo: "Hong Kong",
+            dataFrom: "Panama Papers",
         },
         {
-            id:2,
-            entity:"NAMCHOW (BRITISH VIRGIN ISLANDS) LTD.",
-            jurisdiction:"British Virgin Islands",
-            linkedTo:"Hong Kong",
-            dataFrom:"Panama Papers",
+            id: 2,
+            entity: "NAMCHOW (BRITISH VIRGIN ISLANDS) LTD.",
+            jurisdiction: "British Virgin Islands",
+            linkedTo: "Hong Kong",
+            dataFrom: "Panama Papers",
         },
     ]
 
@@ -94,77 +120,59 @@ function SuppliersPage() {
         setCurrentSupplier(null);
     };
 
-    const countries = [
-        {
-            countryId:1,
-            countryName: "Perú"
-        },
-        {
-            countryId:2,
-            countryName: "Chile"
-        }
-    ]
 
-    const sources = [
-        {
-            sourceId:1,
-            sourceName:"XXXX",
-        },
-        {
-            sourceId:2,
-            sourceName:"YYYY",
-        }
-    ]
 
     return <>{isXsScreen ?
         <SuppliersMobile
-        onChange = {onChange}
-        loading = {loading}
-        filterForm = {filterForm}
-        countries = {countries}
-        handleOnFieldsChange={handleOnFieldsChange}
-        onClickCreate = {onClickCreate}
-        onClickEdit = {onClickEdit}
-        onClickSee = {onClickSee}
-        mdDeleteOpen = {mdDeleteOpen}
-        mdScrOpen = {mdScrOpen}
-        showMdDelete = {showMdDelete}
-        showMdScr = {showMdScr}
-        onOkMdDelete = {onOkMdDelete}
-        onOkMdScr = {onOkMdScr}
-        onCancelMdDelete = {onCancelMdDelete}
-        onCancelMdScr={onCancelMdScr}
-        scrForm = {scrForm}
-        currentSupplier = {currentSupplier}
-        sources = {sources}
-        scrappedData = {scrappedData}
-        mdScrLoading = {mdScrLoading}
+            onChange={onChange}
+            loading={loading}
+            filterForm={filterForm}
+            countries={countries}
+            handleOnFieldsChange={handleOnFieldsChange}
+            onClickCreate={onClickCreate}
+            onClickEdit={onClickEdit}
+            onClickSee={onClickSee}
+            mdDeleteOpen={mdDeleteOpen}
+            mdScrOpen={mdScrOpen}
+            showMdDelete={showMdDelete}
+            showMdScr={showMdScr}
+            onOkMdDelete={onOkMdDelete}
+            onOkMdScr={onOkMdScr}
+            onCancelMdDelete={onCancelMdDelete}
+            onCancelMdScr={onCancelMdScr}
+            scrForm={scrForm}
+            currentSupplier={currentSupplier}
+            sources={sources}
+            scrappedData={scrappedData}
+            mdScrLoading={mdScrLoading}
+            paginador={paginador}
         /> :
         <SuppliersWeb
-        onChange = {onChange}
-        loading = {loading}
-        filterForm = {filterForm}
-        countries = {countries}
-        handleOnFieldsChange = {handleOnFieldsChange}
-        onClickCreate = {onClickCreate}
-        onClickEdit = {onClickEdit}
-        onClickSee = {onClickSee}
-        mdDeleteOpen = {mdDeleteOpen}
-        mdScrOpen = {mdScrOpen}
-        showMdDelete = {showMdDelete}
-        showMdScr = {showMdScr}
-        onOkMdDelete = {onOkMdDelete}
-        onOkMdScr = {onOkMdScr}
-        onCancelMdDelete = {onCancelMdDelete}
-        onCancelMdScr={onCancelMdScr}
-        scrForm = {scrForm}
-        currentSupplier = {currentSupplier}
-        sources = {sources}
-        scrappedData = {scrappedData}
-        mdScrLoading = {mdScrLoading}
+            onChange={onChange}
+            loading={loading}
+            filterForm={filterForm}
+            countries={countries}
+            handleOnFieldsChange={handleOnFieldsChange}
+            onClickCreate={onClickCreate}
+            onClickEdit={onClickEdit}
+            onClickSee={onClickSee}
+            mdDeleteOpen={mdDeleteOpen}
+            mdScrOpen={mdScrOpen}
+            showMdDelete={showMdDelete}
+            showMdScr={showMdScr}
+            onOkMdDelete={onOkMdDelete}
+            onOkMdScr={onOkMdScr}
+            onCancelMdDelete={onCancelMdDelete}
+            onCancelMdScr={onCancelMdScr}
+            scrForm={scrForm}
+            currentSupplier={currentSupplier}
+            sources={sources}
+            scrappedData={scrappedData}
+            mdScrLoading={mdScrLoading}
+            paginador={paginador}
         />
     }
-        
+
     </>;
 }
 
