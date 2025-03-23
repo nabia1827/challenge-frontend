@@ -51,22 +51,22 @@ function SupplierFilter(props) {
                                     }}
                                 >
                                     <Row gutter={[8, 8]} justify={"start"} align={"bottom"} style={{ width: "100%" }}>
-                                        <Col xs={24} sm={8} md={4} lg={4} xl={4}>
+                                        <Col xs={24} sm={24} md={12} lg={8} xl={4}>
                                             <Form.Item label={<Text>Legal Name: </Text>} name='legalName'>
                                                 <Input placeholder="Legal Name" size="large" style={{ width: "100%", height: "36px" }} />
                                             </Form.Item>
                                         </Col>
-                                        <Col xs={24} sm={8} md={4} lg={4} xl={4}>
+                                        <Col xs={24} sm={24} md={12} lg={8} xl={4}>
                                             <Form.Item label={<Text>Trade Name: </Text>} name='tradeName'>
                                                 <Input placeholder="Trade Name" size="large" style={{ width: "100%", height: "36px" }} />
                                             </Form.Item>
                                         </Col>
-                                        <Col xs={24} sm={8} md={4} lg={4} xl={4}>
+                                        <Col xs={24} sm={24} md={12} lg={8} xl={4}>
                                             <Form.Item label={<Text>Tax Identification Number: </Text>} name='taxIdentNumber'>
                                                 <Input placeholder="Tax Identification Number" size="large" style={{ width: "100%", height: "36px" }} />
                                             </Form.Item>
                                         </Col>
-                                        <Col xs={24} sm={8} md={4} lg={4} xl={4}>
+                                        <Col xs={24} sm={24} md={12} lg={8} xl={4}>
                                             <Form.Item label={<Text> Country: </Text>} name='countryId'>
 
                                                 <Select
@@ -84,14 +84,14 @@ function SupplierFilter(props) {
 
                                         </Col>
 
-                                        <Col xs={24} sm={16} md={8} lg={8} xl={8}>
+                                        <Col xs={24} sm={24} md={12} lg={8} xl={8}>
                                             <Form.Item label={<Text> Last Edited: </Text>} name='dateRange'>
                                                 <RangePicker style={{ width: "100%", height: "36px" }} />
                                             </Form.Item>
 
                                         </Col>
 
-                                        <Col xs={24} sm={8} md={4} lg={4} xl={4}>
+                                        <Col xs={24} sm={24} md={4} lg={4} xl={4}>
 
                                             <Form.Item >
                                                 <Button onClick={onReset} type="primary" style={{ backgroundColor: colors.lightBlack, width: "100%", height: "36px" }}>
