@@ -1,20 +1,20 @@
 import React from "react";
-import { Tag, Flex, Button,Typography } from "antd";
-import {FilePdfOutlined} from '@ant-design/icons';
+import { Tag, Flex, Button, Typography } from "antd";
+import { FilePdfOutlined } from '@ant-design/icons';
 import { colors } from "../colors";
-const {Text} = Typography;
-import { 
-    CalendarBlank, 
+const { Text } = Typography;
+import {
+    CalendarBlank,
     Eye,
     FileArrowDown,
     UserCheck,
     PencilSimpleLine,
     Trash,
- } from "@phosphor-icons/react";
+} from "@phosphor-icons/react";
 
-export const ColumnsSuppliers = (onClickEdit,onClickSee,showMdDelete,showMdScr) => {
+export const ColumnsSuppliers = (onClickEdit, onClickSee, showMdDelete, showMdScr) => {
     const columns = [
-        
+
         {
             title: 'Legal Name',
             dataIndex: 'legalName',
@@ -63,7 +63,9 @@ export const ColumnsSuppliers = (onClickEdit,onClickSee,showMdDelete,showMdScr) 
             dataIndex: 'annualRevenueTxt',
             key: 'annualRevenueTxt',
             render: (_, record, index) => (
-                <Tag color="geekblue">{record.annualRevenue.toLocaleString('es-PE', { style: 'currency', currency: 'PEN' })}</Tag>
+                <Tag color="geekblue">
+                    {record.annualRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                </Tag>
             ),
         },
         {
@@ -76,16 +78,16 @@ export const ColumnsSuppliers = (onClickEdit,onClickSee,showMdDelete,showMdScr) 
             key: 'acciones',
             render: (_, record, index) => (
                 <Flex gap={"small"} justify="center" align="center">
-                    <Button onClick={()=>onClickSee(record.supplierId)} type="primary" shape="circle" style={{backgroundColor:colors.lightBlack}} icon={<Eye size={20} color={colors.white} />} />
-                    <Button onClick={()=>onClickEdit(record.supplierId)}  type="primary" shape="circle" style={{backgroundColor:colors.blue}} icon={<PencilSimpleLine size={20} color={colors.white} />} />
-                    <Button onClick={()=>showMdScr(record)} type="primary" shape="circle" style={{backgroundColor:colors.blue}} icon={<UserCheck size={20} color={colors.white} />} />
-                    <Button onClick={()=>showMdDelete(record)} type="primary" shape="circle" style={{backgroundColor:colors.red}} icon={<Trash size={20} color={colors.white} />} />
-                    
-                    
+                    <Button onClick={() => onClickSee(record.supplierId)} type="primary" shape="circle" style={{ backgroundColor: colors.lightBlack }} icon={<Eye size={20} color={colors.white} />} />
+                    <Button onClick={() => onClickEdit(record.supplierId)} type="primary" shape="circle" style={{ backgroundColor: colors.blue }} icon={<PencilSimpleLine size={20} color={colors.white} />} />
+                    <Button onClick={() => showMdScr(record)} type="primary" shape="circle" style={{ backgroundColor: colors.blue }} icon={<UserCheck size={20} color={colors.white} />} />
+                    <Button onClick={() => showMdDelete(record)} type="primary" shape="circle" style={{ backgroundColor: colors.red }} icon={<Trash size={20} color={colors.white} />} />
+
+
                 </Flex>
             ),
         }
     ];
-    
+
     return columns;
 };

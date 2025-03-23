@@ -48,7 +48,7 @@ export const startLogout = () => async (dispatch) => {
     try {
         await api.Auth.logOutApp({
             userId: userId,
-            tokenExpirado: accessToken,
+            expiredToken: accessToken,
             refreshToken: refreshToken,
         });
     } catch (error) {

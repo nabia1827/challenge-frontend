@@ -14,7 +14,7 @@ const initialPaginadorState = {
 
 const initialCommonRequestState = {
     pagina: 1,
-    cantidadRegistrosPorPagina: 10,
+    cantidadRegistrosPorPagina: 5,
     legalName: "",
     tradeName: "",
     taxIdentNumber: "",
@@ -53,7 +53,7 @@ function useSupplierFilteredData(
             );
 
             if (filteredRequest.dateRange) {
-                const { initDate, endDate } = filteredRequest.fechaRegistro;
+                const { initDate, endDate } = filteredRequest.dateRange;
                 filteredRequest.initDate = initDate;
                 filteredRequest.endDate = endDate;
                 delete filteredRequest.dateRange;
@@ -87,7 +87,7 @@ function useSupplierFilteredData(
         );
 
         if (filteredRequest.dateRange) {
-            const { initDate, endDate } = filteredRequest.fechaRegistro;
+            const { initDate, endDate } = filteredRequest.dateRange;
             filteredRequest.initDate = initDate;
             filteredRequest.endDate = endDate;
             delete filteredRequest.dateRange;
@@ -111,7 +111,7 @@ function useSupplierFilteredData(
     };
 
     // Logic to handle filter's fields change
-    const [form] = Form.useForm();
+    const [filterForm] = Form.useForm();
 
     const onReset = () => {
         setRequest((prevState) => ({
@@ -119,13 +119,13 @@ function useSupplierFilteredData(
             legalName: "",
             tradeName: "",
             taxIdentNumber: "",
-            countryId: 0,
+            countryId: null,
             dateRange: {
                 initDate: "",
                 endDate: "",
             },
         }));
-        form.resetFields();
+        filterForm.resetFields();
     };
 
     return {
@@ -135,7 +135,7 @@ function useSupplierFilteredData(
         request,
         setRequest,
         onReset,
-        form,
+        filterForm,
         reloadData,
         usuId
     };

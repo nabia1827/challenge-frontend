@@ -17,7 +17,7 @@ import ModalScreening from "../../../components/modals/ModalScreening";
 
 function SuppliersWeb(props) {
     const { onChange, loading, filterForm, countries, handleOnFieldsChange, scrappedData,
-        onClickCreate, onClickEdit, onClickSee, paginador,
+        onClickCreate, onClickEdit, onClickSee, paginador,onReset,
         mdDeleteOpen, mdScrOpen, showMdDelete, showMdScr, onOkMdDelete, onOkMdScr,
         onCancelMdDelete, onCancelMdScr, scrForm, currentSupplier, sources, mdScrLoading } = props;
     const columns = ColumnsSuppliers(onClickEdit, onClickSee, showMdDelete, showMdScr)
@@ -33,7 +33,7 @@ function SuppliersWeb(props) {
                     </Button>
                 </Flex>
                 <br></br>
-                <SupplierFilter form={filterForm}
+                <SupplierFilter form={filterForm} onReset = {onReset}
                     countries={countries} handleOnFieldsChange={handleOnFieldsChange}></SupplierFilter>
                 <br></br>
                 <Table

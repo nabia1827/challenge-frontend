@@ -18,6 +18,16 @@ const onAccessTokenRefreshed = (newAccessToken) => {
   subscribers.forEach((callback) => callback(newAccessToken));
   subscribers.length = 0;
 };
+axiosDotNet.interceptors.request.use(
+  (config) => {
+    const token = getAccessToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 // Interceptor de respuestas para la API en .NET
 axiosDotNet.interceptors.response.use(
@@ -34,11 +44,12 @@ axiosDotNet.interceptors.response.use(
           isRefreshing = true;
           try {
             const rs = await axiosDotNet.post("/Auth/RefreshToken", {
-              tokenExpirado: getAccessToken(),
+              expiredToken: getAccessToken(),
               refreshToken: getRefreshToken(),
             });
-            const newAccessToken = rs.data.reftokenToken;
-            const refreshToken = rs.data.reftokenRefreshToken;
+            console.log('Refresh token response:', rs);
+            const newAccessToken = rs.token;
+            const refreshToken = rs.refreshToken;
 
             setAccessToken(newAccessToken);
             setRefreshToken(refreshToken);

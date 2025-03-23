@@ -36,7 +36,7 @@ export const switchOnFieldsChange = (campo, changeFields, setRequest) => {
                 countryId: changeFields[0].value,
             }));
             break;
-        case "fechaRegistro":
+        case "dateRange":
             setRequest((prev) => ({
                 ...prev,
                 pageNumber: 1,

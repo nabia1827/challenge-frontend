@@ -25,6 +25,7 @@ export const UpsertSupplier = async (id, legalName, tradeName,
             website: website,
             physicalAddress: address,
             countryId: countryId,
+            countryName:"",
             annualRevenue: revenue,
             lastEdited: "",
             supplierActive: true

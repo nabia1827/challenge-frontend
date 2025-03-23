@@ -16,7 +16,6 @@ function SuppliersPage() {
     const isXsScreen = screens.xs !== undefined && screens.xs;
 
     const { countries, sources } = useSelector((state) => state.app);
-    const [filterForm] = Form.useForm();
     const navigate = useNavigate();
 
     const customApiCall = async (filteredRequest) => {
@@ -30,7 +29,7 @@ function SuppliersPage() {
         request,
         setRequest,
         onReset,
-        form,
+        filterForm,
         reloadData,
         usuId
     } = useSupplierFilteredData(customApiCall);
@@ -72,8 +71,10 @@ function SuppliersPage() {
         DeleteSupplier(currentSupplier.supplierId).then((response) => {
             if (response.isSuccess) {
                 message.success("Successfully removed");
+                
                 setMdDeleteOpen(false);
                 setCurrentSupplier(null);
+                reloadData();
             }
         });
     };
@@ -146,6 +147,7 @@ function SuppliersPage() {
             scrappedData={scrappedData}
             mdScrLoading={mdScrLoading}
             paginador={paginador}
+            onReset = {onReset}
         /> :
         <SuppliersWeb
             onChange={onChange}
@@ -170,6 +172,7 @@ function SuppliersPage() {
             scrappedData={scrappedData}
             mdScrLoading={mdScrLoading}
             paginador={paginador}
+            onReset = {onReset}
         />
     }
 

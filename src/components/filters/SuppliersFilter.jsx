@@ -17,7 +17,7 @@ function SupplierFilter(props) {
     return (
         <>
             <Collapse
-            style={{width:"100%"}}
+                style={{ width: "100%" }}
                 items={[
                     {
                         key: '1',
@@ -68,31 +68,29 @@ function SupplierFilter(props) {
                                         </Col>
                                         <Col xs={24} sm={8} md={4} lg={4} xl={4}>
                                             <Form.Item label={<Text> Country: </Text>} name='countryId'>
-                                                <Select
 
-                                                    style={{ width: "100%", height: "36px", textAlign: "left" }}
-                                                    placeholder="Country"
+                                                <Select
+                                                    showSearch
                                                     allowClear
-                                                >
-                                                    {
-                                                        countries.map((c) => (
-                                                            <Select.Option key={c.countryId} value={c.countryId}>
-                                                                {c.countryName}
-                                                            </Select.Option>
-                                                        ))
-                                                    }
-                                                </Select>
+                                                    placeholder="Select a country"
+                                                    optionFilterProp="label"
+                                                    style={{ width: "100%", height: "36px", textAlign: "left" }}
+                                                    options={(countries || []).map((c) => ({
+                                                        value: c.countryId,
+                                                        label: c.countryName,
+                                                    }))}
+                                                />
                                             </Form.Item>
 
                                         </Col>
 
-                                        <Col xs={24} sm={16} md={8} lg={8} xl={8 }>
+                                        <Col xs={24} sm={16} md={8} lg={8} xl={8}>
                                             <Form.Item label={<Text> Last Edited: </Text>} name='dateRange'>
                                                 <RangePicker style={{ width: "100%", height: "36px" }} />
                                             </Form.Item>
 
                                         </Col>
-                                        
+
                                         <Col xs={24} sm={8} md={4} lg={4} xl={4}>
 
                                             <Form.Item >
