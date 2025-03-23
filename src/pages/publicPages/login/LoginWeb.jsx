@@ -52,10 +52,7 @@ function LoginWeb(props) {
                             )
                         }
 
-                        <Flex gap={"small"} justify="flex-start" align="center" style={{ width: "100%" }}>
-                            <Switch size="small" defaultChecked onChange={onSwitchRemember} />
-                            <Text>Remember me</Text>
-                        </Flex>
+                        <br></br>
                         <Button style={enableButtonStyle} key="submit" type="primary" loading={loading} onClick={() => onLogin(username, password)}>
                             Log in
                         </Button>
