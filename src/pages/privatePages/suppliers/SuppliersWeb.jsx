@@ -17,7 +17,7 @@ import ModalScreening from "../../../components/modals/ModalScreening";
 
 function SuppliersWeb(props) {
     const { onChange, loading, filterForm, countries, handleOnFieldsChange, scrappedData,
-        onClickCreate, onClickEdit, onClickSee, paginador,onReset,
+        onClickCreate, onClickEdit, onClickSee, paginador, onReset,
         mdDeleteOpen, mdScrOpen, showMdDelete, showMdScr, onOkMdDelete, onOkMdScr,
         onCancelMdDelete, onCancelMdScr, scrForm, currentSupplier, sources, mdScrLoading } = props;
     const columns = ColumnsSuppliers(onClickEdit, onClickSee, showMdDelete, showMdScr)
@@ -33,35 +33,38 @@ function SuppliersWeb(props) {
                     </Button>
                 </Flex>
                 <br></br>
-                <SupplierFilter form={filterForm} onReset = {onReset}
+                <SupplierFilter form={filterForm} onReset={onReset}
                     countries={countries} handleOnFieldsChange={handleOnFieldsChange}></SupplierFilter>
                 <br></br>
-                <Table
-                    style={{ width: "100%" }}
-                    loading={loading}
-                    rowKey="supplierId"
-                    columns={columns}
-                    dataSource={paginador?.data}
-                    pagination={{
-                        onChange,
-                        total: paginador?.count,
-                        pageSize: paginador?.pageSize,
-                        current: paginador?.pageIndex,
-                        showSizeChanger: true,
-                        showTotal: (total) => `Hay ${total} registros`,
-                    }}
-                    size="small"
-                    components={{
-                        header: {
-                            cell: ({ children }) => (
-                                <th style={{ background: colors.lightBlack, color: "white", padding: "10px" }}>
-                                    {children}
-                                </th>
-                            ),
-                        },
-                    }}
+                <Flex justify="center" align="center" style={{ width: "100%" }}>
+                    <Table
+                        style={{ width: "100%", overflow:"auto"}}
+                        loading={loading}
+                        rowKey="supplierId"
+                        columns={columns}
+                        dataSource={paginador?.data}
+                        pagination={{
+                            onChange,
+                            total: paginador?.count,
+                            pageSize: paginador?.pageSize,
+                            current: paginador?.pageIndex,
+                            showSizeChanger: true,
+                            showTotal: (total) => `${total} items`,
+                        }}
+                        size="small"
+                        components={{
+                            header: {
+                                cell: ({ children }) => (
+                                    <th style={{ background: colors.lightBlack, color: "white", padding: "10px" }}>
+                                        {children}
+                                    </th>
+                                ),
+                            },
+                        }}
 
-                />
+                    />
+                </Flex>
+
             </Flex>
             <ModalDeleteSupplier
                 modalOpen={mdDeleteOpen}

@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 
 const tokenName = "token-app";
 const refreshTokenName = "refreshToken-app";
+const pythonTokenName = "token-python";
 
 // Set the access token as an HTTP-only cookie
 export const setAccessToken = (token) => {
@@ -21,6 +22,15 @@ export const setRefreshToken = (refreshToken) => {
   });
 };
 
+// Set the python token as an HTTP-only cookie
+export const setPythonToken = (token) => {
+  Cookies.set(pythonTokenName, token, {
+    path: "/",
+    //secure: true, // Solo se enviará a través de HTTPS
+    //sameSite: 'strict' // Contra ataques CSRF
+  });
+};
+
 // Get the access token
 export const getAccessToken = () => {
   return Cookies.get(tokenName);
@@ -31,6 +41,12 @@ export const getRefreshToken = () => {
   return Cookies.get(refreshTokenName);
 };
 
+// Get the python token
+export const getPythonToken = () => {
+  return Cookies.get(pythonTokenName);
+};
+
+
 // Remove the access token
 export const removeAccessToken = () => {
   Cookies.remove(tokenName, { path: "/" });
@@ -39,4 +55,9 @@ export const removeAccessToken = () => {
 // Remove the refresh token
 export const removeRefreshToken = () => {
   Cookies.remove(refreshTokenName, { path: "/" });
+};
+
+// Remove the refresh token
+export const removePythonToken = () => {
+  Cookies.remove(pythonTokenName, { path: "/" });
 };

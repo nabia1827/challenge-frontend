@@ -15,6 +15,7 @@ function ModalScreening(props) {
     const { modalOpen, handleOk, handleCancel, form, sources, data,loading } = props;
 
     const [columns, setColumns] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         if (data && data.length>0) {
@@ -22,8 +23,8 @@ function ModalScreening(props) {
         }
     }, [data]);
 
-    const onChange = () =>{
-
+    const onChange = (page) =>{
+        setCurrentPage(page)
     }
 
     return (
@@ -67,7 +68,7 @@ function ModalScreening(props) {
                                     name='legalName'
 
                                 >
-                                    <Input placeholder="Trade name..."></Input>
+                                    <Input disabled placeholder="Legal name..."></Input>
 
                                 </Form.Item>
 
@@ -78,7 +79,12 @@ function ModalScreening(props) {
                                     style={{ width: "100%", marginBottom: "0" }}
                                     label={<Text className="qq-app-modal-title" >Information Source</Text>}
                                     name='sourceId'
-
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'This field is required.',
+                                        },
+                                    ]}
                                 >
                                     <Select
                                         showSearch
@@ -105,17 +111,17 @@ function ModalScreening(props) {
                             dataSource={data}
                             pagination={{
                                 onChange,
-                                total: 5,
+                                total: data.length?data.length:0,
                                 pageSize: 5,
-                                current: 1,
-                                showSizeChanger: true,
-                                showTotal: (total) => `Hay ${total} registros`,
+                                current: currentPage,
+                                
+                                showTotal: (total) => `${total} hits`,
                             }}
                             size="small"
                             components={{
                                 header: {
                                     cell: ({ children }) => (
-                                        <th style={{ background: colors.lightBlack, color: "white", padding: "10px" }}>
+                                        <th style={{ background: colors.lightBlack, color: "white", padding: "10px",minHeight:"40px" }}>
                                             {children}
                                         </th>
                                     ),

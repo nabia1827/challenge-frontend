@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import api from "../../../services/api";
 import useSupplierFilteredData from "../../../hooks/filters/useSupplierFilteredData";
 import { switchOnFieldsChange } from "../../../utils/suppliers/switchOnFieldsChange";
-import { DeleteSupplier } from "../../../utils/suppliers/dinamicCalls";
+import { DeleteSupplier, Screening } from "../../../utils/suppliers/dinamicCalls";
 const { useBreakpoint } = Grid;
 
 function SuppliersPage() {
@@ -90,35 +90,38 @@ function SuppliersPage() {
     const [scrappedData, setScrappedData] = useState([]);
     const [scrForm] = Form.useForm();
 
-    const dummyData = [
-        {
-            id: 1,
-            entity: "NAMCHOW (BRITISH VIRGIN ISLANDS) LTD.",
-            jurisdiction: "British Virgin Islands",
-            linkedTo: "Hong Kong",
-            dataFrom: "Panama Papers",
-        },
-        {
-            id: 2,
-            entity: "NAMCHOW (BRITISH VIRGIN ISLANDS) LTD.",
-            jurisdiction: "British Virgin Islands",
-            linkedTo: "Hong Kong",
-            dataFrom: "Panama Papers",
-        },
-    ]
 
     const showMdScr = (record) => {
-        setCurrentSupplier(record)
+        scrForm.setFieldsValue({
+            legalName:record.legalName,
+            
+        });
+
         setMdScrOpen(true);
     };
 
-    const onOkMdScr = () => {
-        setScrappedData(dummyData);
+    const onOkMdScr = async () => {
+        setMdScrLoading(true);
+        try{
+            const values = await scrForm.validateFields();
+            Screening(values.legalName, values.sourceId).then((response)=>{
+                if(response.success){
+                    setScrappedData(response.data)
+                }
+                setMdScrLoading(false);
+            });
+
+        }catch(error){
+            message.error("Please complete all fields.");
+        }
+        
     };
 
     const onCancelMdScr = () => {
         setMdScrOpen(false);
         setCurrentSupplier(null);
+        setScrappedData([]);
+        scrForm.resetFields();
     };
 
 

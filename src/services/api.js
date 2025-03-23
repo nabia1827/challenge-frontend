@@ -1,4 +1,4 @@
-import { axiosDotNet } from "./axios";
+import { axiosDotNet, axiosPython } from "./axios";
 
 
 const responseBody = res => {
@@ -14,7 +14,14 @@ const requests = {
     patch: (url, body) => axiosDotNet.patch(url, body).then(responseBody),
 };
 
-
+const requestsPython = {
+    get: url => axiosPython.get(url).then(responseBody),
+    post: (url, body) => axiosPython.post(url, body).then(responseBody),
+    put: (url, body) => axiosPython.put(url, body).then(responseBody),
+    delete: url => axiosPython.delete(url).then(responseBody),
+    patch: (url, body) => axiosPython.patch(url, body).then(responseBody),
+}
+//NET WEB API
 const Auth = {
     loginApp: body => requests.post('/Auth/Authenticate', body),
     logOutApp: (body) => requests.post('/Auth/Logout', body),
@@ -35,9 +42,16 @@ const Source = {
     ListSources: () => requests.get('/Source/ListSources'),
 }
 
+//PYTHON WEB API
+const PythonScraper = {
+    Authenticate: (credentials) => requestsPython.post(`/authenticate`,credentials),
+    Screening: (legalName, sourceId) => requestsPython.get(`/list-scrap-result?legal_name=${legalName}&source_id=${sourceId}`),
+};
+
 export default { 
     Auth, 
     Supplier,
     Country,
     Source,
+    PythonScraper,
 };

@@ -46,3 +46,14 @@ export const DeleteSupplier = async (supplierId) => {
         message.error(error.message);
     }
 };
+
+
+export const Screening = async (legalName, sourceId) => {
+
+    try {
+        const response = await api.PythonScraper.Screening(legalName, sourceId);
+        return response;
+    } catch (error) {
+        message.error(error.message);
+    }
+};

@@ -6,8 +6,11 @@ import {
     getRefreshToken,
     removeAccessToken,
     removeRefreshToken,
+    removePythonToken,
     setAccessToken,
     setRefreshToken,
+    setPythonToken,
+
 } from "../../../utils/cookie";
 
 import { login, logout, refreshTokenExpired } from "./authActionSync";
@@ -20,15 +23,25 @@ export const startLogin = (username, userPassword) => async (dispatch) => {
             username: username,
             userPassword: userPassword,
         });
+
+        const responsePython = await api.PythonScraper.Authenticate({
+            username: username,
+            password: userPassword,
+        });
         
         console.log(response)
-        if (response.isSuccess) {
+        if (response.isSuccess && responsePython.success) {
             const { data } = response;
+
             console.log("Logged in: ", data);
+            console.log("Auth python: ", responsePython)
             const { token, refreshToken } = data;
+
+
             dispatch(login(data));
             setAccessToken(token);
             setRefreshToken(refreshToken);
+            setPythonToken(responsePython.token);
             return response;
         } else {
             return Promise.reject(response.message);
@@ -56,6 +69,7 @@ export const startLogout = () => async (dispatch) => {
         dispatch(logout());
         removeAccessToken();
         removeRefreshToken();
+        removePythonToken();
         secureLocalStorage.clear();
     }
 };
@@ -63,6 +77,7 @@ export const startLogout = () => async (dispatch) => {
 export const removeExpiredRefreshToken = () => async (dispatch) => {
     removeAccessToken();
     removeRefreshToken();
+    removePythonToken();
     secureLocalStorage.clear();
     dispatch(refreshTokenExpired());
 };

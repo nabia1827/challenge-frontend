@@ -12,12 +12,18 @@ import {
     Trash,
  } from "@phosphor-icons/react";
 
-export const ColumnsSource = (data) => {
+ export const ColumnsSource = (data) => {
+    if (!data || data.length === 0) return [];
+
     const columns = Object.keys(data[0]).map(key => ({
         title: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()), // Formatea el título
         dataIndex: key,
         key: key,
     }));
 
-    return columns;
+    // Prioriza la columna 'id' si existe
+    const idColumn = columns.find(col => col.dataIndex === 'id');
+    const otherColumns = columns.filter(col => col.dataIndex !== 'id');
+
+    return idColumn ? [idColumn, ...otherColumns] : columns;
 };
